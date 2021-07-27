@@ -10,30 +10,35 @@ const ExpenseForm = () => {
 
   // Using one state instead
   const [userInput, setUserInput] = useState({
-    enteredTitle: '',
-    enteredAmount: '',
-    enteredDate: ''
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
   });
 
   const titleChangeHandler = (event) => {
     // setEnteredTitle(event.target.value);
-    setUserInput({
-      ...userInput,
-      enteredTitle: event.target.value
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: event.target.value
+    // });
+
+    // Note: If we schedule a lot of state updates at the same time, we could be depending on outdated or incorrect state snapshot & that's why the new approach below
+    setUserInput((prevState) => {
+      return { ...prevState, enteredTitle: event.target.value };
     });
   };
   const amountChangeHandler = (event) => {
     // setEnteredAmount(event.target.value);
     setUserInput({
       ...userInput,
-      enteredAmount: event.target.value
+      enteredAmount: event.target.value,
     });
   };
   const dateChangeHandler = (event) => {
     // setEnteredDate(event.target.value);
     setUserInput({
       ...userInput,
-      enteredDate: event.target.value
+      enteredDate: event.target.value,
     });
   };
 
