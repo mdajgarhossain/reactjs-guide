@@ -3,30 +3,50 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  // Here is multiple three state
+  // const [enteredTitle, setEnteredTitle] = useState("");
+  // const [enteredAmount, setEnteredAmount] = useState("");
+  // const [enteredDate, setEnteredDate] = useState("");
+
+  // Using one state instead
+  const [userInput, setUserInput] = useState({
+    enteredTitle: '',
+    enteredAmount: '',
+    enteredDate: ''
+  });
 
   const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
+    // setEnteredTitle(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredTitle: event.target.value
+    });
   };
   const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
+    // setEnteredAmount(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredAmount: event.target.value
+    });
   };
   const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+    // setEnteredDate(event.target.value);
+    setUserInput({
+      ...userInput,
+      enteredDate: event.target.value
+    });
   };
 
   return (
     <form>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <pre>{enteredTitle}</pre>
+          <pre>{userInput.enteredTitle}</pre>
           <label>Title</label>
           <input type="text" onChange={titleChangeHandler} />
         </div>
         <div className="new-expense__control">
-          <pre>{enteredAmount}</pre>
+          <pre>{userInput.enteredAmount}</pre>
           <label>Amount</label>
           <input
             type="number"
@@ -36,7 +56,7 @@ const ExpenseForm = () => {
           />
         </div>
         <div className="new-expense__control">
-          <pre>{enteredDate}</pre>
+          <pre>{userInput.enteredDate}</pre>
           <label>Date</label>
           <input
             type="date"
